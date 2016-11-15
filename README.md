@@ -35,7 +35,7 @@ Use the transcompiler like this:
 ```
 set JAVA_HOME="C:\Program Files\Java\jdk1.7.0"
 %JAVA_HOME%\bin\java -cp bin/;%JAVA_HOME%\lib\tools.jar tutego.j2c.J2C -o app.c App.java
-````
+```
 
 The option `-o` specifies the output file and after the converting you get a C-version of `App.java` in `app.c`. Now you can compile the C file to assembler code or to machine code, e.g. in PRG format for an emulator:
 
@@ -52,7 +52,7 @@ Simple example:
 
 Adapted from a C course http://skoe.de/wiki/doku.php?id=ckurs:04-abend4:
 
-´´´´
+´´´
 import static tutego.j2c.include.Stdio.printf;
 
 public class Application
