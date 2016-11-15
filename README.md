@@ -1,12 +1,12 @@
 This is a very simple transcompiler (source-to-compiler) that converts a super small subset of the Java syntax to C. It was written to emit C code for the CC65 compiler so that developers can write Java code to program for the C64 home computer.
 
-==What is it all about?==
+## What is it all about?
 
 Developers write code because they either do it for money, they have to solve a problem or they are bored. I was bored so I was playing with the JDK compiler and `com.sun.source.tree` types and also with the simple C compiler CC65 that produces code for home computers, like the C64. This gives rise to the idea to bring both together.
 
 Java is a language with the precise definition of types (like length of data types) and behaviour (like `ArrayIndexOutOfBoundException` when you run over an array). C is almost the opposite; different length of build-in data types and weird behaviour when a program runs out of an array. Instead of bringing the Java semantic to a corresponding C program (see JCGO), this transcompiler simply converts Java programs almost directly to C. So you can see this more as an alternative syntax to C. Thus, the semantic (`int` is always 4 byte e.g.) is not preserved and it’s up to the C compiler which size the data type will be. However, if its compiled by the CC65 compiler the size of an `int`, `char`, … is known to the developers.
 
-==Supported and unsupported features==
+## Supported and unsupported features==
 
 The Java syntax is similar to the C syntax and converting is pretty easy. But you have to help the compiler and develop “C-like”. An example: In Java it’s natural to declare variables in the smallest scope where in C you have to declare at the top of a method. This transcompiler doesn’t rearrange the declarations and it’s also not possible to declare variables in for-loops. The current version also doesn’t produce prototypes for methods.
 
@@ -26,33 +26,33 @@ You can **not** use:
 
 A subset of the Java syntax is used and its not the aim or the transcompiler to accept ans translate any construct.
 
-==How to use==
+## How to use
 
 J2C is written in pure Java and only converts from Java to C. You need the CC65 compiler and linker suite to produce assembly or linked binary code.
 
 Use the transcompiler like this:
 
-{{{
+```
 set JAVA_HOME="C:\Program Files\Java\jdk1.7.0"
 %JAVA_HOME%\bin\java -cp bin/;%JAVA_HOME%\lib\tools.jar tutego.j2c.J2C -o app.c App.java
-}}}
+````
 
 The option `-o` specifies the output file and after the converting you get a C-version of `App.java` in `app.c`. Now you can compile the C file to assembler code or to machine code, e.g. in PRG format for an emulator:
 
-{{{
+```
 cl65 -o app.prg app.c
 "C:\Program Files\WinVICE-2.2-x64\x64.exe" app.prg
-}}}
+```
 
 The last call opens the VICE C64 emulator and runs your program.
 
-==Example==
+## Example
 
 Simple example:
 
 Adapted from a C course http://skoe.de/wiki/doku.php?id=ckurs:04-abend4:
 
-{{{
+´´´´
 import static tutego.j2c.include.Stdio.printf;
 
 public class Application
@@ -84,13 +84,13 @@ public class Application
     return 0;
   }
 }
-}}}
+´´´
 
 http://www.tutego.de/blog/javainsel/images/Mit-Java-fr-C64-entwickeln_20A0/image.png
 
 More advanced example with usage of some Header files:
 
-{{{
+´´´
 import static tutego.j2c.include.C64.*;
 import static tutego.j2c.include.Conio.*;
 import static tutego.j2c.include.PeekPoke.*;
@@ -212,10 +212,10 @@ public class Application2
     return 0;
   }
 }
-}}}
+´´´
 
 
-==Transcompilation strategies==
+## Transcompilation strategies
 
 Beside the many deficits some transformations are done by the J2C transcompiler.
 
@@ -226,7 +226,7 @@ Beside the many deficits some transformations are done by the J2C transcompiler.
   * If an identifier in Java is named like a C reserved keyword--like `restrict` or `auto`--it will be renamed, for example from `register` to `__register__`.
   * Unicode identifiers are converted to valid C identifiers; every Unicode character is escaped to `__u<HEXOFUNICODE>__`.
 
-==What you can do==
+## What you can do
 
 Some extensions are very easy, others are some more time-consuming. If you like to help and extend the transcompiler, you could (from easy to more work-intensive):
 
@@ -258,7 +258,7 @@ Some extensions are very easy, others are some more time-consuming. If you like 
   * Should call to Java methods be rewritten? Like `Sytem.exit(n)` to `exit(n)` (and `<stdlib.h>` will be imported),  and so on? This would make it easier to port code with calls to some Java library methods, like `Math.max(..)` or `Integer.toString(…)`
   * You name it
 
-==Links==
+## Links
 
   * JCGO http://www.ivmaisoft.com/jcgo/
   * CC65 Compiler: http://www.cc65.org/ 
