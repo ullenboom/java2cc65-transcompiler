@@ -6,7 +6,7 @@ Developers write code because they either do it for money, they have to solve a 
 
 Java is a language with the precise definition of types (like length of data types) and behaviour (like `ArrayIndexOutOfBoundException` when you run over an array). C is almost the opposite; different length of build-in data types and weird behaviour when a program runs out of an array. Instead of bringing the Java semantic to a corresponding C program (see JCGO), this transcompiler simply converts Java programs almost directly to C. So you can see this more as an alternative syntax to C. Thus, the semantic (`int` is always 4 byte e.g.) is not preserved and it’s up to the C compiler which size the data type will be. However, if its compiled by the CC65 compiler the size of an `int`, `char`, … is known to the developers.
 
-## Supported and unsupported features==
+## Supported and unsupported features
 
 The Java syntax is similar to the C syntax and converting is pretty easy. But you have to help the compiler and develop “C-like”. An example: In Java it’s natural to declare variables in the smallest scope where in C you have to declare at the top of a method. This transcompiler doesn’t rearrange the declarations and it’s also not possible to declare variables in for-loops. The current version also doesn’t produce prototypes for methods.
 
@@ -52,7 +52,7 @@ Simple example:
 
 Adapted from a C course http://skoe.de/wiki/doku.php?id=ckurs:04-abend4:
 
-´´´
+```
 import static tutego.j2c.include.Stdio.printf;
 
 public class Application
@@ -84,13 +84,13 @@ public class Application
     return 0;
   }
 }
-´´´
+```
 
 http://www.tutego.de/blog/javainsel/images/Mit-Java-fr-C64-entwickeln_20A0/image.png
 
 More advanced example with usage of some Header files:
 
-´´´
+```
 import static tutego.j2c.include.C64.*;
 import static tutego.j2c.include.Conio.*;
 import static tutego.j2c.include.PeekPoke.*;
@@ -212,8 +212,7 @@ public class Application2
     return 0;
   }
 }
-´´´
-
+```
 
 ## Transcompilation strategies
 
@@ -265,4 +264,4 @@ Some extensions are very easy, others are some more time-consuming. If you like 
   * C specification: http://www.open-std.org/jtc1/sc22/WG14/www/docs/n1256.pdf
   * Java language specification: http://docs.oracle.com/javase/specs/jls/se7/html/jls-18.html
   * WinWICE: http://www.viceteam.org/
-  * Java-API of the AST visitor: http://docs.oracle.com/javase/7/docs/jdk/api/javac/tree/index.html
+  * Java-API of the AST visitor: http://docs.oracle.com/javase/8/docs/jdk/api/javac/tree/index.html
